@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Psychic Game</title>
+</head>
+<body>
+<div class="game">
+  <h1>The Psychic Game!</h1>
+
+  <h2>  Guess the letter that the computer is thinking. </h2>
+
+  <p class="wins">
+    Wins: 
+  </p>
+
+  <p class="losses">
+  Losses: 
+  </p>
+
+  <p class="guesses-left">
+  Guesses left: 9
+  </p>
+
+  <p class="letters-guessed">
+  Letters guessed:<span class="letters"></span>
+  </p>
+
+</div>
+
+<script type="text/javascript">
+var guesses = 9;
+var wins = 0;
+var losses = 0;
+var computer = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+document.onkeyup = function(event) {
+  var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+  var computerGuess = computer[Math.floor(Math.random()*computer.length)];
+  function userWin() {
+      wins++;
+      document.querySelector(".wins").innerHTML = "Wins: " + wins;
+      resetCounter();
+      document.querySelector(".letters").innerHTML = " ";
+  }
+  function userLose() {
+      losses++;
+      document.querySelector(".losses").innerHTML = "Losses: " + losses;
+      resetCounter();
+      document.querySelector(".letters").innerHTML = " ";
+  }
+  function resetCounter() {
+      guesses = 9;
+      document.querySelector(".guesses-left").innerHTML = "Guesses left: " + guesses;
+  }
+  if (userGuess === computerGuess) {
+      userWin();
+  } else {
+      guesses--;
+      document.querySelector(".guesses-left").innerHTML = "Guesses left: " + guesses;
+      document.querySelector(".letters").append(" " + userGuess + ", ");
+  }
+  if (guesses === 0) {
+      userLose();
+  }
+};
+    
+</script>
+
+</body>
+</html>
